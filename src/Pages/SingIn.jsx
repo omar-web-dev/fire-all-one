@@ -1,24 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SingIn = () => {
+    const [email, setEmail] = useState('')
+    const [error, setError] = useState('')
+    const handelSubmit =(e)=>{
+        // e.preventDefault()
+        e.preventDefault()
+        const from = e.target
+        const email = from.email.value
+        
+        const password = from.password.value
+        console.log(email, password);
+
+        if (!/^\S+@\S+\.\S+$/.test(email)){
+            setError('Please send a valid email')
+            return;
+        }
+    }
     return (
         <div className='sing-in-page'>
             <div className="w-full max-w-md mt-10 p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 mx-auto">
                 <h1 className="text-2xl font-bold text-center">Sing In</h1>
-                <form novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handelSubmit} className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
-                        <label for="username" className="block dark:text-gray-400">Username</label>
-                        <input type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <p>{error}</p>
+                        <label htmlFor="Email" className="block dark:text-gray-400">email</label>
+                        <input type="email" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label for="password" className="block dark:text-gray-400">Password</label>
+                        <label htmlFor="password" className="block dark:text-gray-400">Password</label>
                         <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                         <div className="flex justify-end text-xs dark:text-gray-400">
                             <Link to='' rel="noopener noreferrer" href="#">Forgot Password?</Link>
                         </div>
                     </div>
-                    <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
+                    <button  className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
