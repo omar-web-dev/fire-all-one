@@ -4,6 +4,7 @@ import ErrorPage from '../Pages/ErrorPage'
 import Home from '../Pages/Home'
 import SingIn from "../Pages/SingIn";
 import SingUp from "../Pages/SingUp";
+import Statistics from "../Pages/Statistics";
 
 
 export const router = createBrowserRouter([
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path : 'sing-up',
         element : <SingUp/>
+      },
+      {
+        path : 'statistics',
+        element : <Statistics/>
       },
     ],
     errorElement : <ErrorPage></ErrorPage>

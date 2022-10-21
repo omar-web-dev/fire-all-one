@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../Pages/Context/UseContext';
 
 const Navbar = () => {
+    const { user } = useContext(AuthContext)
+    // const {displayName, email} = user
     return (
         <div className='px-2 lg:px-[10%] bg-gray-100'>
             <div className="navbar px-0 block  bg-gray-100">
@@ -15,12 +18,14 @@ const Navbar = () => {
                             <li>
                                 <NavLink to='/home'>Home</NavLink>
                             </li>
-                            <li>
-                                <NavLink to='/sing-in'>Sing Up</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to='/sing-up'>Sing In</NavLink>
-                            </li>
+                            <>
+                                <li>
+                                    <NavLink to='/sing-up'>Sing Up</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to='/sing-in'>Sing In</NavLink>
+                                </li>
+                            </>
                             <li>
                                 <NavLink to='/statistics'>Statistics </NavLink>
                             </li>
@@ -38,10 +43,10 @@ const Navbar = () => {
                             <NavLink to='/home'>Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to='/sing-in'>Sing Up</NavLink>
+                            <NavLink to='/sing-in'>Sing In</NavLink>
                         </li>
                         <li>
-                            <NavLink to='/sing-up'>Sing In</NavLink>
+                            <NavLink to='/sing-up'>Sing Up</NavLink>
                         </li>
                         <li>
                             <NavLink to='/statistics'>Statistics </NavLink>
@@ -49,13 +54,23 @@ const Navbar = () => {
                         <li>
                             <NavLink to='/blog'>Blog</NavLink>
                         </li>
-                        <li><NavLink to='/blog'
-                            aria-label='Blog'
-                            title='Blog'>Blog</NavLink></li>
+
+                        {/* <NavLink to='/blog'>{user?.displayName}</NavLink> */}
+                        {/* //     </li>
+                            //     <li>
+                            //         <NavLink to='/blog'>{user?.email}</NavLink>
+                                </li>
+                            // </> */}
                     </ul>
+                    {user?.uid &&
+                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            <li className='p-1'>{user?.displayName}</li>
+                            <li className='p-1'>Logout</li>
+                        </ul>
+                    }
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
 
     );
 };

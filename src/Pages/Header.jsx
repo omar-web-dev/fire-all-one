@@ -5,8 +5,8 @@ const Header = () => {
     return (
         <div className=" bg-gray-200 lg:px-[10%] md:px-14">
             <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 items-center">
-                <div className="imgtxt-text  w-[calc( 50% - 10px)] lg:mt-10 lg:p-10 ">
-                    <div className="imgtxt-headline width6 regular-heading lg:p-0 p-5">
+                <div className="img txt-text  w-[calc( 50% - 10px)] lg:mt-10 lg:p-10 ">
+                    <div className="img txt-headline width6 regular-heading lg:p-0 p-5">
                         <p className="text-2xl  text-[#0A40CE]">
                             <span className="text-[#0A40CE] uppercase font-normal" >Operations managers</span>
                         </p>
@@ -14,7 +14,7 @@ const Header = () => {
                         Give Wings to <br /> Your Career By Learning Today's Most-Demanded Skills    
                         </h1>
 
-                        <Link to='/quiz' className="mt-3 lg:mt-5 btn w-full text-xl p-3 h-16 ">
+                        <Link to='/' className="mt-3 lg:mt-5 btn w-full text-xl p-3 h-16 ">
                         I'm ready now
                             <span className='ml-5 rounded-full  caret-lime-200'>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 bg-[#191d24] h-10  ">
