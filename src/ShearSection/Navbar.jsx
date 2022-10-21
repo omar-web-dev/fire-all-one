@@ -3,8 +3,17 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Pages/Context/UseContext';
 
 const Navbar = () => {
-    const { user } = useContext(AuthContext)
-    // const {displayName, email} = user
+    const { user, logOut } = useContext(AuthContext)
+    
+    const handelLogOut = () => {
+        logOut()
+        .then(() => {
+            console.log('Sign-out successful.');
+          }).catch((error) => {
+            console.log(error.massage);
+          });
+    }    
+
     return (
         <div className='px-2 lg:px-[10%] bg-gray-100'>
             <div className="navbar px-0 block  bg-gray-100">
@@ -63,15 +72,22 @@ const Navbar = () => {
                             // </> */}
                     </ul>
                     {user?.uid &&
-                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            <li className='p-1'>{user?.displayName}</li>
-                            <li className='p-1'>Logout</li>
-                        </ul>
+                        <>
+                            <div   className="avatar">
+                                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <img src=" https://placeimg.com/192/192/people" />
+                                </div>
+                            </div>
+                            <ul id='profile' className=" absolute top-12 right-20 menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+                                <li><Link>{user?.displayName}</Link></li>
+                                <li><Link>View Profile</Link></li>
+                                <li><Link onClick={handelLogOut}>Log Out</Link></li>
+                            </ul>
+                        </>
                     }
                 </div>
             </div >
         </div >
-
     );
 };
 

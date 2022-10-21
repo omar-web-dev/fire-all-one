@@ -6,12 +6,22 @@ import { AuthContext } from './Context/UseContext';
 const SingIn = () => {
     // const [us, setEmailVari] = useState('')
     const [error, setError] = useState('')
-    console.log(error);
+    // console.log(error);
 
     const {googleLongIn} = useContext(AuthContext)
     const provider = new GoogleAuthProvider();
 
-    const handelGoogleLogIn =(e)=>{
+    const handelSingInPa = (e) => {
+        e.preventDefault()
+        const from = e.target
+        const email = from.email.value
+        const password = from.password.value
+        console.log( email, password);
+      }
+
+        
+
+    const handelGoogleLogIn =()=>{
         googleLongIn(provider)    
         .then((result) => {
             const user = result.user;
@@ -20,13 +30,13 @@ const SingIn = () => {
             // const errorCode = error.code;
             const errorMessage = error.message;
             setError(errorMessage)
-          });   
+          }); 
     }
     return (
         <div className='sing-in-page'>
             <div className="w-full max-w-md mt-10 p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 mx-auto">
                 <h1 className="text-2xl font-bold text-center">Sing In</h1>
-                <form  className="space-y-6 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handelSingInPa} className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <p>{error}</p>
                         <label htmlFor="Email" className="block dark:text-gray-400">email</label>
@@ -39,7 +49,7 @@ const SingIn = () => {
                             <Link to='' rel="noopener noreferrer" href="#">Forgot Password?</Link>
                         </div>
                     </div>
-                    <button  className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
+                    <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
