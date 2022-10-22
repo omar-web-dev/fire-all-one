@@ -4,10 +4,13 @@ import { AuthContext } from './Context/UseContext';
 
 const SingUp = () => {
 
-    const {createUser} = useContext(AuthContext)
+    const {createUser, userProfileUpdate, emailVerification} = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
+    const [status, setStatus] = useState('')
+    console.log(status); 
     console.log(error);
+    
 
     const handelSignUp = (e) => {
         e.preventDefault()
@@ -16,20 +19,40 @@ const SingUp = () => {
         const photo_url = from.photo_url.value
         const email = from.email.value
         const password = from.password.value
-        console.log( email, password);
+        
 
         if (!/^\S+@\S+\.\S+$/.test(email)) {
             setError('Please send a valid email')
             return;
         }
 
-        createUser(name, photo_url, email, password)
-        .then(result =>{
+        emailVerification()
+        .then((result) => {
             const user = result.user
-            console.log(user);
+            console.log('Email verification sent!',user)
+            // ...
+          });
+        
+        const handelUpdateProfile = (name, photo_url) => {
+            const profile = {
+                displayName: name, 
+                photoURL: photo_url
+            }
+            userProfileUpdate(profile)
+            .then(() => {
+                setStatus('Profile updated!')
+              }).catch((error) => {
+                setError(error.code)
+              });
+            
+        }
+        createUser(email, password)
+        .then(result =>{
+            const userInfo = result.user
+            console.log(userInfo);
+            handelUpdateProfile(name, photo_url)
         })
-        .catch(error => setError(error))
-
+        .catch(error => setError(error.code))
         setError('')
         setEmail(email)
     }

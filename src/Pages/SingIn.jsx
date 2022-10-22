@@ -13,28 +13,28 @@ const SingIn = () => {
 
     // console.log(error);
 
-    let to = location.state?.from?.pathname || '/'
+    const from = location.state?.from?.pathname || '/'
 
     const { googleLongIn } = useContext(AuthContext)
     const provider = new GoogleAuthProvider();
 
     const handelSingInPa = (e) => {
         e.preventDefault()
-        const from = e.target
-        const email = from.email.value
-        const password = from.password.value
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
         console.log(email, password);
 
         signInEmailPassword(email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
                 console.log(user);
-                navigate(to, { replace: true })
+                navigate(from, { replace : true })
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                console.log(errorMessage);
                 setError(errorMessage);
                 setErrorCode(errorCode);
             });

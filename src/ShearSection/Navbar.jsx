@@ -75,9 +75,9 @@ const Navbar = () => {
                     {user?.uid &&
                         <>
                             <div   className="avatar">
-                                {user.uid && <p>SuccessFull Login</p>}
+                                {/* {user.uid && <p>SuccessFull Login</p>} */ console.log(user)}
                                 <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src=" https://placeimg.com/192/192/people" />
+                                    <img src={user?.photoURL} alt={user?.displayName}/>
                                 </div>
                             </div>
                             <ul id='profile' className=" absolute top-12 right-20 menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
