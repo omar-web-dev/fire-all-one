@@ -5,6 +5,7 @@ import Home from '../Pages/Home'
 import SingIn from "../Pages/SingIn";
 import SingUp from "../Pages/SingUp";
 import Statistics from "../Pages/Statistics";
+import PrivetRoute from "./PrivetRoute";
 
 
 export const router = createBrowserRouter([
@@ -30,7 +31,7 @@ export const router = createBrowserRouter([
       },
       {
         path : 'statistics',
-        element : <Statistics/>
+        element : <PrivetRoute><Statistics/></PrivetRoute>
       },
     ],
     errorElement : <ErrorPage></ErrorPage>

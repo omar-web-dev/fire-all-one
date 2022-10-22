@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Pages/Context/UseContext';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
-    
+    const { currentUser, setCurrentUser } = useState('')
     const handelLogOut = () => {
         logOut()
-        .then(() => {
-            console.log('Sign-out successful.');
+        .then(result => {
+            const user = result.user
+            console.log(user.uid);
           }).catch((error) => {
-            console.log(error.massage);
+            console.log(error.code);
           });
     }    
 
@@ -74,12 +75,15 @@ const Navbar = () => {
                     {user?.uid &&
                         <>
                             <div   className="avatar">
+                                {user.uid && <p>SuccessFull Login</p>}
                                 <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                     <img src=" https://placeimg.com/192/192/people" />
                                 </div>
                             </div>
                             <ul id='profile' className=" absolute top-12 right-20 menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
-                                <li><Link>{user?.displayName}</Link></li>
+                                {user?.displayName &&
+                                    <li><Link>{user?.displayName}</Link></li>
+                                }
                                 <li><Link>View Profile</Link></li>
                                 <li><Link onClick={handelLogOut}>Log Out</Link></li>
                             </ul>

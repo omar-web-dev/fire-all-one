@@ -7,6 +7,7 @@ const SingUp = () => {
     const {createUser} = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
+    console.log(error);
 
     const handelSignUp = (e) => {
         e.preventDefault()

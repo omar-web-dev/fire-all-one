@@ -1,11 +1,12 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from './Context/UseContext';
 
 const SingIn = () => {
-    // const [us, setEmailVari] = useState('')
+    const {signInEmailPassword} = useContext(AuthContext)
     const [error, setError] = useState('')
+    const [errorCode, setErrorCode] = useState('')
     // console.log(error);
 
     const {googleLongIn} = useContext(AuthContext)
@@ -17,6 +18,21 @@ const SingIn = () => {
         const email = from.email.value
         const password = from.password.value
         console.log( email, password);
+
+        signInEmailPassword(email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user);
+            // navigate('/')
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setError(errorMessage);
+            setErrorCode(errorCode);
+          });
+
       }
 
         
@@ -26,10 +42,12 @@ const SingIn = () => {
         .then((result) => {
             const user = result.user;
             console.log(user);
+            setError('')
           }).catch((error) => {
-            // const errorCode = error.code;
+            const errorCode = error.code;
             const errorMessage = error.message;
-            setError(errorMessage)
+            setErrorCode(errorCode)
+            setError( errorMessage)
           }); 
     }
     return (
@@ -38,7 +56,7 @@ const SingIn = () => {
                 <h1 className="text-2xl font-bold text-center">Sing In</h1>
                 <form onSubmit={handelSingInPa} className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
-                        <p>{error}</p>
+                        {errorCode && <p className='text-center text-red-400'>{errorCode.slice(5,100)}</p>}
                         <label htmlFor="Email" className="block dark:text-gray-400">email</label>
                         <input type="email" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
