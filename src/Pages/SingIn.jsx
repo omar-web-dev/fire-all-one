@@ -1,9 +1,11 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import useTitle from '../hooks/useTitle';
 import { AuthContext } from './Context/UseContext';
 
 const SingIn = () => {
+    useTitle("sign-in")
     const { signInEmailPassword } = useContext(AuthContext)
     const [error, setError] = useState('')
     const [errorCode, setErrorCode] = useState('')

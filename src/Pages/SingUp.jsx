@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useTitle from '../hooks/useTitle';
 import { AuthContext } from './Context/UseContext';
 
 const SingUp = () => {
 
+    useTitle('Resignation')
     const {createUser, userProfileUpdate, emailVerification} = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
